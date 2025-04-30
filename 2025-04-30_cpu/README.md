@@ -104,7 +104,7 @@ docker build -t bitnet:2025-05-30_cpu .
 ```bash
 docker run --rm --pull=always \
   -it public.aml-repo.cms.waikato.ac.nz:443/llm/bitnet:2025-05-30_cpu \
-  pip freeze > requirements.txt
+  /opt/BitNet.env/bin/pip freeze > requirements.txt
 ```
 
 
