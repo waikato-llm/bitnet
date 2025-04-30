@@ -1,0 +1,4 @@
+#!/bin/bash
+
+. /opt/BitNet.env/bin/activate
+huggingface-cli "$@"

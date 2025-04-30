@@ -1,0 +1,4 @@
+#!/bin/bash
+
+. /opt/BitNet.env/bin/activate
+python /opt/BitNet/run_inference.py "$@"
