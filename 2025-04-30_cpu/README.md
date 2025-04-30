@@ -138,13 +138,25 @@ docker run -u $(id -u):$(id -g) -e USER=$USER ...
 
 The following additional scripts are available:
 
-* `huggingface-cli` - for exporting template config files and setting parameters (calls the `/opt/BitNet/run_inference.py` script)
+* `huggingface-cli` - for exporting template config files and setting parameters (calls the `/opt/BitNet.env/bin/huggingface-cli`)
 * `bitnet_run_inference` - for exporting template config files and setting parameters (calls the `/opt/BitNet/run_inference.py` script)
 
 
 ## Example
 
 ```bash
+mkdir cache triton models logs
+
+docker run --shm-size 8G --net=host \
+    -u $(id -u):$(id -g) -e USER=$USER \
+    -v `pwd`:/workspace \
+    -v `pwd`/cache:/.cache \
+    -v `pwd`/triton:/.triton \
+    -it waikatodatamining/bitnet:2025-05-30_cpu
+
+huggingface-cli download microsoft/BitNet-b1.58-2B-4T-gguf \
+    --local-dir /workspace/models/BitNet-b1.58-2B-4T
+
 bitnet_run_inference \
     -m /workspace/models/BitNet-b1.58-2B-4T/ggml-model-i2_s.gguf \
     -p "You are a helpful assistant" \
